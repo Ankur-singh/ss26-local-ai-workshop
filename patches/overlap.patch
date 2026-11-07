@@ -1,0 +1,20 @@
+diff --git a/python/minisgl/scheduler/scheduler.py b/python/minisgl/scheduler/scheduler.py
+index d0c08d8..488ba66 100644
+--- a/python/minisgl/scheduler/scheduler.py
++++ b/python/minisgl/scheduler/scheduler.py
+@@ -95,6 +95,7 @@ class Scheduler(SchedulerIOMixin):
+         for msg in self.receive_msg(blocking=blocking):
+             self._process_one_msg(msg)
+ 
++        self._process_last_data(last_data)
+         forward_input = self._schedule_next_batch()
+         ongoing_data = None
+         if forward_input is not None:
+@@ -102,7 +103,6 @@ class Scheduler(SchedulerIOMixin):
+                 self.engine.stream.wait_stream(self.stream)
+                 ongoing_data = (forward_input, self._forward(forward_input))
+ 
+-        self._process_last_data(last_data)
+         return ongoing_data
+ 
+     def normal_loop(self) -> None:

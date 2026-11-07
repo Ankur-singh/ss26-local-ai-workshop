@@ -1,0 +1,13 @@
+diff --git a/python/minisgl/scheduler/prefill.py b/python/minisgl/scheduler/prefill.py
+index 3ffe3a5..d6c83da 100644
+--- a/python/minisgl/scheduler/prefill.py
++++ b/python/minisgl/scheduler/prefill.py
+@@ -70,7 +70,7 @@ class PrefillAdder:
+         cached_len: int,
+     ) -> Req:
+         remain_len = pending_req.input_len - cached_len
+-        chunk_size = min(self.token_budget, remain_len)
++        chunk_size = remain_len
+         is_chunked = chunk_size < remain_len
+         CLS = ChunkedReq if is_chunked else Req
+         self.token_budget -= chunk_size

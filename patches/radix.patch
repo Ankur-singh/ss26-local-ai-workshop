@@ -1,0 +1,14 @@
+diff --git a/python/minisgl/kvcache/radix_cache.py b/python/minisgl/kvcache/radix_cache.py
+index c59909a..bd5e18b 100644
+--- a/python/minisgl/kvcache/radix_cache.py
++++ b/python/minisgl/kvcache/radix_cache.py
+@@ -130,7 +130,8 @@ class RadixPrefixCache(BasePrefixCache):
+                 node = node.parent
+ 
+     def match_prefix(self, input_ids: torch.Tensor) -> MatchResult:
+-        node, prefix_len = self._tree_walk(input_ids)
++        # match at page granularity
++        node, prefix_len = self._tree_walk(input_ids[: self.page_size])
+         return MatchResult(RadixCacheHandle(prefix_len, node))
+ 
+     def insert_prefix(self, input_ids: torch.Tensor, indices: torch.Tensor) -> InsertResult:

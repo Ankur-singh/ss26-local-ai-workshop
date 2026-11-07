@@ -1,0 +1,10 @@
+/env1/
+/env2/
+/env3/
+/env4/
+/playground/
+/.original/
+/models/
+/results/
+/.cache/
+__pycache__/
